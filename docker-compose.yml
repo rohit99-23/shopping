@@ -1,7 +1,6 @@
 services:
   frontend:
-    build: ./frontend
-    image: frontend
+    image: errohit07/frontend
     ports:
       - "3000:80"
     depends_on:
@@ -10,8 +9,7 @@ services:
       - order-service
 
   user-service:
-    build: ./backend/services/user-service
-    image: user-service
+    image: errohit07/user-service
     ports:
       - "5001:5001"
     depends_on:
@@ -22,8 +20,7 @@ services:
 
 
   order-service:
-    build: ./backend/services/order-service
-    image: order-service
+    image: errohit07/order-service
     ports:
       - "5002:5002"
     depends_on:
@@ -34,8 +31,7 @@ services:
 
 
   product-service:
-    build: ./backend/services/product-service
-    image: product-service
+    image: errohit07/product-service
     ports:
       - "5003:5003"
     depends_on:
