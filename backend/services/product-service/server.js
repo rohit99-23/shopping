@@ -33,7 +33,7 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
 
-const port = 5002;
+const port = process.env.PORT || 5003;
 
 app.listen(port, () => {
   console.log(`Product Service running at http://localhost:${port}`);

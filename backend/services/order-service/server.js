@@ -29,7 +29,7 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
 
-const port = 5003;
+const port = process.env.PORT || 5002;
 
 app.listen(port, () => {
   console.log(`Order Service running at http://localhost:${port}`);

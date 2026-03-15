@@ -1,8 +1,6 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from './orderModel.js';
-import User from '../user-service/userModel.js';
-import Product from '../product-service/productModel.js';
 import { isAuth, isAdmin, mailgun, payOrderEmailTemplate } from './utils.js';
 
 const orderRouter = express.Router();
@@ -51,14 +49,6 @@ orderRouter.get(
         },
       },
     ]);
-    const users = await User.aggregate([
-      {
-        $group: {
-          _id: null,
-          numUsers: { $sum: 1 },
-        },
-      },
-    ]);
     const dailyOrders = await Order.aggregate([
       {
         $group: {
@@ -69,15 +59,7 @@ orderRouter.get(
       },
       { $sort: { _id: 1 } },
     ]);
-    const productCategories = await Product.aggregate([
-      {
-        $group: {
-          _id: '$category',
-          count: { $sum: 1 },
-        },
-      },
-    ]);
-    res.send({ users, orders, dailyOrders, productCategories });
+    res.send({ orders, dailyOrders });
   })
 );
 
