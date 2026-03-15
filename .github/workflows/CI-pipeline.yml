@@ -8,7 +8,7 @@ on:
 
   jobs:
     Image-build:
-       runs-on-deploy: ubuntu-latest
+       runs-on: ubuntu-latest
 
        steps:
          - name: checkout code
