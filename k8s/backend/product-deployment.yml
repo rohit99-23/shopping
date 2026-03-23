@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: service
+metadata:
+  name: product-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: product-service
+
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      containers:
+        - name: product-service-container
+          image: errohit07/product-service
+          ports:
+          - containerPort: 5003

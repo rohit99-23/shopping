@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Ingress
+metadata:
+  name: app-ingress
+spec:
+  rules:
+  - host: shopping.local
+    http:
+      paths:
+      - path: /
+        pathType: prefix
+        Backend:
+          service:
+            name: frontend
+            port:
+              number: 3000
+
+      - path: /api/user-service
+        pathType: prefix
+        Backend:
+          service:
+            name: user-service
+            port:
+              number: 5001
+
+
+
+      - path: /api/product-service
+        pathType: prefix
+        Backend:
+          service:
+            name: product-service
+            port:
+              number: 5003
+
+
+      - path: /api/order-service
+        pathType: prefix
+        Backend:
+          service:
+            name: order-service
+            port:
+              number: 5002

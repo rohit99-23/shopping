@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: service
+metadata:
+  name: order-service
+spec:
+  selector:
+    app: User
+  ports:
+    - ports: 80
+      targetPort: 5002
+  type: ClusterIP
