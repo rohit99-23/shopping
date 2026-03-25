@@ -45,3 +45,12 @@ jobs:
       - name: Push image
         run: docker push errohit07/product-service
 
+#job2 Deploy to k8s cluster
+  Deploy-to-k8s:
+    runs-on: ubuntu-latest
+    needs: Image-build
+
+    steps:
+      - name: Deploy to Kubernetes
+        run: kubectl apply -f k8s/
+  
