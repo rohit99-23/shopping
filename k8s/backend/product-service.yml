@@ -6,7 +6,7 @@ spec:
   selector:
     app: product-service
   ports:
-    - ports: 80
+    - port: 80
       targetPort: 5003
   type: ClusterIP
 
