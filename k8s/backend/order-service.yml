@@ -4,7 +4,7 @@ metadata:
   name: order-service
 spec:
   selector:
-    app: User
+    app: order-service
   ports:
     - ports: 80
       targetPort: 5002
