@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: app-ingress
@@ -8,36 +8,36 @@ spec:
     http:
       paths:
       - path: /
-        pathType: prefix
+        pathType: Prefix
         Backend:
           service:
             name: frontend
             port:
-              number: 3000
+              number: 80
 
-      - path: /api/user-service
-        pathType: prefix
+      - path: /api/users
+        pathType: Prefix
         Backend:
           service:
             name: user-service
             port:
-              number: 5001
+              number: 80
 
 
 
-      - path: /api/product-service
-        pathType: prefix
+      - path: /api/products
+        pathType: Prefix
         Backend:
           service:
             name: product-service
             port:
-              number: 5003
+              number: 80
 
 
-      - path: /api/order-service
-        pathType: prefix
+      - path: /api/orders
+        pathType: Prefix
         Backend:
           service:
             name: order-service
             port:
-              number: 5002
+              number: 80
