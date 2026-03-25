@@ -9,7 +9,7 @@ spec:
       paths:
       - path: /
         pathType: Prefix
-        Backend:
+        backend:
           service:
             name: frontend
             port:
@@ -17,7 +17,7 @@ spec:
 
       - path: /api/users
         pathType: Prefix
-        Backend:
+        backend:
           service:
             name: user-service
             port:
@@ -27,7 +27,7 @@ spec:
 
       - path: /api/products
         pathType: Prefix
-        Backend:
+        backend:
           service:
             name: product-service
             port:
@@ -36,7 +36,7 @@ spec:
 
       - path: /api/orders
         pathType: Prefix
-        Backend:
+        backend:
           service:
             name: order-service
             port:
