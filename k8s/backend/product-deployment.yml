@@ -17,4 +17,8 @@ spec:
         - name: product-service-container
           image: errohit07/product-service
           ports:
-          - containerPort: 5003
+            - containerPort: 5003
+
+          env:
+            - name: MONGO_URI
+              value: mongodb://mongo:27017/amazona
