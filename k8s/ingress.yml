@@ -4,7 +4,7 @@ metadata:
   name: app-ingress
 spec:
   rules:
-  - host: shopping.local
+  - host: shopping.com
     http:
       paths:
       - path: /
