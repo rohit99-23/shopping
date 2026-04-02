@@ -20,31 +20,31 @@ jobs:
           password: ${{secrets.DOCKER_PASSWORD}}
 
 
-      - name: Build Docker image
+      - name: Build Docker image (Frontend)
         run: docker build -t errohit07/frontend ./frontend
 
-      - name: Push image
+      - name: Push image (frontend)
         run: docker push errohit07/frontend
 
-      - name: Build Docker image
+      - name: Build Docker image (User Service)
         run: docker build -t errohit07/user-service ./backend/services/user-service
 
-      - name: Push image
+      - name: Push image (user service)
         run: docker push errohit07/user-service
 
-      - name: Build Docker image
+      - name: Build Docker image (Order Service)
         run: docker build -t errohit07/order-service ./backend/services/order-service
 
-      - name: Push image
+      - name: Push image (order service)
         run: docker push errohit07/order-service
 
-      - name: Build Docker image
+      - name: Build Docker image (Product Service)
         run: docker build -t errohit07/product-service ./backend/services/product-service
 
-      - name: Push image
+      - name: Push image (product service)
         run: docker push errohit07/product-service
 
-      - name: Pull on EC2 instance
+      - name: Pull on EC2 instance 
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{secrets.EC2_HOST}}
@@ -63,6 +63,9 @@ jobs:
     needs: Image-build
 
     steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+
       - name: Deploy to Kubernetes
         run: kubectl apply -f k8s/ --recursive
   
