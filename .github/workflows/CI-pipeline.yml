@@ -57,6 +57,8 @@ jobs:
             docker-compose pull
             docker-compose up -d
 
+            kubectl apply -f k8s/ --recursive
+
 #job2 Deploy to k8s cluster
   Deploy-to-k8s:
     runs-on: ubuntu-latest
