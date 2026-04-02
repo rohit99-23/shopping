@@ -57,7 +57,7 @@ jobs:
             docker-compose up -d
             
             export KUBECONFIG=/home/ec2-user/.kube/config
-            kubectl apply -f k8s/ --recursive
+            kubectl --kubeconfig=/home/ec2-user/.kube/config apply -f k8s/ --recursive
 
 #job2 Deploy to k8s cluster
   Deploy-to-k8s:
