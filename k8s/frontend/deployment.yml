@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: errohit07/frontend
+          image: errohit07/frontend:latest
           imagePullPolicy: Always
           ports: 
           - containerPort: 3000

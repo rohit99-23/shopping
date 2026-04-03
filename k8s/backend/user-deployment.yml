@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: user-service-container
-          image: errohit07/user-service
+          image: errohit07/user-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5001
