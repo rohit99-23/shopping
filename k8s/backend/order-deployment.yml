@@ -16,6 +16,7 @@ spec:
       containers:
         - name: order-service-container
           image: errohit07/order-service
+          imagePullPolicy: Always
           ports:
             - containerPort: 5002
           env:
