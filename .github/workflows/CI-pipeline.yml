@@ -58,11 +58,11 @@ jobs:
             docker-compose pull
             docker-compose up -d
 
-            kubectl set image deployment/frontend frontend=errohit07/frontend:${IMAGE_TAG}
-            kubectl set image deployment/user-service user-service=errohit07/user-service:${IMAGE_TAG}
-            kubectl set image deployment/product-service product-service=errohit07/product-service:${IMAGE_TAG}
-            kubectl set image deployment/order-service order-service=errohit07/order-service:${IMAGE_TAG}
-            
+            kubectl set image deployment/frontend frontend-container=errohit07/frontend:${IMAGE_TAG}
+            kubectl set image deployment/user-service user-service-container=errohit07/user-service:${IMAGE_TAG}
+            kubectl set image deployment/product-service product-service-container=errohit07/product-service:${IMAGE_TAG}
+            kubectl set image deployment/order-service order-service-container=errohit07/order-service:${IMAGE_TAG}
+
             kubectl --kubeconfig=/home/ec2-user/.kube/config get nodes
             kubectl --kubeconfig=/home/ec2-user/.kube/config apply -f k8s/ --recursive
             kubectl --kubeconfig=/home/ec2-user/.kube/config apply rollout restart deployment --all
