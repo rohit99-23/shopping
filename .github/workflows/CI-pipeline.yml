@@ -19,32 +19,30 @@ jobs:
           username: ${{secrets.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_PASSWORD}}
 
-      - name: Set image tag
-        run: echo "IMAGE_TAG=${GITHUB_SHA}" >> $GITHUB_ENV
 
       - name: Build Docker image (Frontend)
-        run: docker build -t errohit07/frontend:${{ env.IMAGE_TAG }} ./frontend
+        run: docker build -t errohit07/frontend ./frontend
 
       - name: Push image (frontend)
-        run: docker push errohit07/frontend:${{ env.IMAGE_TAG }}
+        run: docker push errohit07/frontend
 
       - name: Build Docker image (User Service)
-        run: docker build -t errohit07/user-service:${{ env.IMAGE_TAG }} ./backend/services/user-service
+        run: docker build -t errohit07/user-service ./backend/services/user-service
 
       - name: Push image (user service)
-        run: docker push errohit07/user-service:${{ env.IMAGE_TAG }}
+        run: docker push errohit07/user-service
 
       - name: Build Docker image (Order Service)
-        run: docker build -t errohit07/order-service:${{ env.IMAGE_TAG }} ./backend/services/order-service
+        run: docker build -t errohit07/order-service ./backend/services/order-service
 
       - name: Push image (order service)
-        run: docker push errohit07/order-service:${{ env.IMAGE_TAG }}
+        run: docker push errohit07/order-service
 
       - name: Build Docker image (Product Service)
-        run: docker build -t errohit07/product-service:${{ env.IMAGE_TAG }} ./backend/services/product-service
+        run: docker build -t errohit07/product-service ./backend/services/product-service
 
       - name: Push image (product service)
-        run: docker push errohit07/product-service:${{ env.IMAGE_TAG }}
+        run: docker push errohit07/product-service
 
       - name: Pull on EC2 instance 
         uses: appleboy/ssh-action@v0.1.10
@@ -52,31 +50,26 @@ jobs:
           host: ${{secrets.EC2_HOST}}
           username: ${{secrets.EC2_USERNAME}}
           key: ${{secrets.EC2_SSH_KEY}}
+          envs: IMAGE_TAG
           script: |
+            echo "Using IMAGE_TAG=$IMAGE_TAG"
+
             cd /home/ec2-user/shopping
             git pull origin main
             docker-compose pull
             docker-compose up -d
+<<<<<<< HEAD
+
+=======
+>>>>>>> parent of 10380ab (Kubeadm config start)
+            
+
+            kubectl --kubeconfig=/home/ec2-user/.kube/config get nodes
+            kubectl --kubeconfig=/home/ec2-user/.kube/config apply -f k8s/ --recursive
 
             kubectl set image deployment/frontend frontend-container=errohit07/frontend:${IMAGE_TAG}
             kubectl set image deployment/user-service user-service-container=errohit07/user-service:${IMAGE_TAG}
             kubectl set image deployment/product-service product-service-container=errohit07/product-service:${IMAGE_TAG}
             kubectl set image deployment/order-service order-service-container=errohit07/order-service:${IMAGE_TAG}
 
-            kubectl --kubeconfig=/home/ec2-user/.kube/config get nodes
-            kubectl --kubeconfig=/home/ec2-user/.kube/config apply -f k8s/ --recursive
             kubectl --kubeconfig=/home/ec2-user/.kube/config rollout restart deployment
-
-#job2 Deploy to k8s cluster
-  Deploy-to-k8s:
-    runs-on: ubuntu-latest
-    needs: Image-build
-
-
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v3
-
-      - name: Deploy to Kubernetes
-        run: kubectl apply -f k8s/ --recursive
-  

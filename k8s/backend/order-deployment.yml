@@ -15,8 +15,12 @@ spec:
     spec:
       containers:
         - name: order-service-container
+<<<<<<< HEAD
           image: errohit07/order-service:latest
           imagePullPolicy: Always
+=======
+          image: errohit07/order-service
+>>>>>>> parent of 10380ab (Kubeadm config start)
           ports:
             - containerPort: 5002
           env:
