@@ -66,6 +66,10 @@ jobs:
 
             kubectl --kubeconfig=/home/ec2-user/.kube/config get nodes
             kubectl --kubeconfig=/home/ec2-user/.kube/config apply -f k8s/ --recursive
+<<<<<<< HEAD
+=======
+            kubectl --kubeconfig=/home/ec2-user/.kube/config apply rollout restart deployment frontend
+>>>>>>> parent of efb8135 (Kubeadm config start)
 
             kubectl set image deployment/frontend frontend-container=errohit07/frontend:${IMAGE_TAG}
             kubectl set image deployment/user-service user-service-container=errohit07/user-service:${IMAGE_TAG}
