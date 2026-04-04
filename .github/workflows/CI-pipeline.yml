@@ -21,28 +21,28 @@ jobs:
 
 
       - name: Build Docker image (Frontend)
-        run: docker build -t errohit07/frontend ./frontend
+        run: docker build -t errohit07/frontend:${{ github.sha }} ./frontend
 
       - name: Push image (frontend)
-        run: docker push errohit07/frontend
+        run: docker push errohit07/frontend:${{ github.sha }}
 
       - name: Build Docker image (User Service)
-        run: docker build -t errohit07/user-service ./backend/services/user-service
+        run: docker build -t errohit07/user-service:${{ github.sha }} ./backend/services/user-service
 
       - name: Push image (user service)
-        run: docker push errohit07/user-service
+        run: docker push errohit07/user-service:${{ github.sha }}
 
       - name: Build Docker image (Order Service)
-        run: docker build -t errohit07/order-service ./backend/services/order-service
+        run: docker build -t errohit07/order-service:${{ github.sha }} ./backend/services/order-service
 
       - name: Push image (order service)
-        run: docker push errohit07/order-service
+        run: docker push errohit07/order-service:${{ github.sha }}
 
       - name: Build Docker image (Product Service)
-        run: docker build -t errohit07/product-service ./backend/services/product-service
+        run: docker build -t errohit07/product-service:${{ github.sha }} ./backend/services/product-service
 
       - name: Push image (product service)
-        run: docker push errohit07/product-service
+        run: docker push errohit07/product-service:${{ github.sha }}
 
       - name: Pull on EC2 instance 
         uses: appleboy/ssh-action@v0.1.10
@@ -58,18 +58,10 @@ jobs:
             git pull origin main
             docker-compose pull
             docker-compose up -d
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 10380ab (Kubeadm config start)
             
 
             kubectl --kubeconfig=/home/ec2-user/.kube/config get nodes
             kubectl --kubeconfig=/home/ec2-user/.kube/config apply -f k8s/ --recursive
-<<<<<<< HEAD
-=======
-            kubectl --kubeconfig=/home/ec2-user/.kube/config apply rollout restart deployment frontend
->>>>>>> parent of efb8135 (Kubeadm config start)
 
             kubectl set image deployment/frontend frontend-container=errohit07/frontend:${IMAGE_TAG}
             kubectl set image deployment/user-service user-service-container=errohit07/user-service:${IMAGE_TAG}
