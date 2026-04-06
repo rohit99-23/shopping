@@ -15,12 +15,8 @@ spec:
     spec:
       containers:
         - name: product-service-container
-<<<<<<< HEAD
           image: errohit07/product-service:latest
           imagePullPolicy: Always
-=======
-          image: errohit07/product-service
->>>>>>> parent of 10380ab (Kubeadm config start)
           ports:
             - containerPort: 5003
 

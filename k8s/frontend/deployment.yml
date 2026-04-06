@@ -15,12 +15,9 @@ spec:
     spec:
       containers:
         - name: frontend-container
-<<<<<<< HEAD
           image: errohit07/frontend:latest
           imagePullPolicy: Always
-=======
-          image: errohit07/frontend
->>>>>>> parent of 10380ab (Kubeadm config start)
+
           ports: 
           - containerPort: 3000
 
