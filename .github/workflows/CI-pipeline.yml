@@ -75,3 +75,4 @@ jobs:
             kubectl set image deployment/order-service order-service-container=errohit07/order-service:${IMAGE_TAG}
 
             kubectl --kubeconfig=/home/ec2-user/.kube/config rollout restart deployment
+            
