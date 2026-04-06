@@ -54,10 +54,6 @@ jobs:
           username: ${{secrets.EC2_USERNAME}}
           key: ${{secrets.EC2_SSH_KEY}}
           envs: IMAGE_TAG
-        
-        env:
-          IMAGE_TAG: ${{ github.sha }}
-
           script: |
 
             cd /home/ec2-user/shopping
@@ -76,3 +72,5 @@ jobs:
 
             kubectl --kubeconfig=/home/ec2-user/.kube/config rollout restart deployment
             
+        env:
+          IMAGE_TAG: ${{ github.sha }}
