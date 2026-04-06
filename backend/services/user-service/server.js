@@ -5,15 +5,6 @@ import userRouter from "./userRoutes.js";
 
 dotenv.config({ path: "./.env" });
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log("User service connected to db");
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
-
 const app = express();
 
 app.use(express.json());
@@ -27,8 +18,17 @@ app.use((err, req, res, next) => {
 
 const port = process.env.port || 5001;
 
-app.listen(port, () => {
-  console.log(`User Service running at http://localhost:${port}`);
-});
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("User service connected to db");
+
+    app.listen(port, () => {
+      console.log(`User Service running at http://localhost:${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
 
 console.log("Mongo URI:", process.env.MONGODB_URI);
