@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import seedRouter from "./seedRoutes.js";
 import productRouter from "./productRoutes.js";
 import uploadRouter from "./uploadRoutes.js";
+import os from "os";
 
 dotenv.config({ path: "./.env" });
 
@@ -28,6 +29,13 @@ app.get("/api/keys/google", (req, res) => {
 app.use("/api/upload", uploadRouter);
 app.use("/api/seed", seedRouter);
 app.use("/api/products", productRouter);
+
+// Load balancer verification endpoint
+app.get("/hostname", (req, res) => {
+  res.send({
+    hostname: os.hostname(),
+  });
+});
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
