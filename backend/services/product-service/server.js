@@ -32,6 +32,8 @@ app.use("/api/products", productRouter);
 
 // Load balancer verification endpoint
 app.get("/hostname", (req, res) => {
+console.log(`Request handled by: ${os.hostname()}`);
+
   res.send({
     hostname: os.hostname(),
   });
